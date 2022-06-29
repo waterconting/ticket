@@ -1,0 +1,93 @@
+#jpa配置
+spring:
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: none  #指定为update，每次启动项目检测表结构有变化的时候会新增字段，表不存在时会新建，如果指定create，则每次启动项目都会清空数据并删除表，再新建
+    database: mysql
+    show-sql: true
+    properties:
+      hibernate:
+      jdbc:
+        batch_size: 500
+        batch_versioned_data: true
+      order_inserts: true
+      order_updates: true
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://139.155.28.251:3306/ticket?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    username: root
+    password: wangluohuoyun123456.
+    dbcp2:
+      test-while-idle: true
+      validation-query: SELECT 1
+      time-between-eviction-runs-millis: 3600000
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      filters: stat,wall
+      connection-properties: druid.stat.mergeSql\=true;druid.stat.slowSqlMillis\=5000
+      filter:
+        stat:
+          merge-sql: true
+          slow-sql-millis: 5000
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: '*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*'
+    #系统时间格式
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    #上传文件大小配置
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 200MB
+  output:
+    ansi:
+      enabled: detect
+#  mvc:
+#    static-path-pattern: /showFile/**
+#  resources:
+#    static-locations: file:C://
+eureka:
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
+    home-page-url-path: ${server.servlet.context-path}/swagger-ui.html
+    status-page-url-path: ${server.servlet.context-path}/swagger-ui.html
+
+feign:
+  hystrix:
+    enabled: true #打开hystirx，但感觉默认是开启的
+    command:
+      default:
+        execution:
+          isolation:
+            thread:
+              timeoutInMilliseconds: 15000
+ribbon:
+  ReadTimeout: 240000
+  ConnectTimeout: 60000
+
+enable: true
+
+
+logging:
+  config: classpath:logback-spring-dev.xml
+  level:
+    dao: error
+

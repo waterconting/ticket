@@ -1,0 +1,20 @@
+server:
+  port: 3001
+  max-http-header-size: 40960
+  tomcat:
+    max-http-post-size: 40960
+  #雪花算法配置 工作id和数据中心id
+  #工作机器ID(0~31)
+  workerId: 1
+  #数据中心ID(0~31)
+  datacenterId: 1
+  servlet:
+    context-path:
+spring:
+  profiles:
+    active:
+      - dev
+  application:
+    name: ticket-manage
+  config:
+    name: manage
