@@ -28,7 +28,9 @@ public class UserTwoEntity {
     private String uid;
     @ApiModelProperty(value = "试用次数")
     private String tryNumber;
-
+    @ApiModelProperty(value = "创建时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createTime;
 
     @Id
     @Column(name = "id")
@@ -100,9 +102,19 @@ public class UserTwoEntity {
         this.tryNumber = tryNumber;
     }
 
+    @Basic
+    @Column(name = "create_time")
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
     @Override
     public String toString() {
-        return "UserEntity{" +
+        return "UserTwoEntity{" +
                 "id='" + id + '\'' +
                 ", stuckPassword='" + stuckPassword + '\'' +
                 ", useTimeType='" + useTimeType + '\'' +
@@ -110,6 +122,7 @@ public class UserTwoEntity {
                 ", endTime=" + endTime +
                 ", uid='" + uid + '\'' +
                 ", tryNumber='" + tryNumber + '\'' +
+                ", createTime=" + createTime +
                 '}';
     }
 }

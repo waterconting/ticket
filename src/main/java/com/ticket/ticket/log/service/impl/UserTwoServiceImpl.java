@@ -113,6 +113,7 @@ public class UserTwoServiceImpl extends SnowflakerServiceHelperBase implements U
 
                 String stuckPassword = entity.getStuckPassword();
                 String useTimeType = stuckPassword.substring(18);
+                entity.setCreateTime(date);
                 entity.setUseTimeType(useTimeType);
                 switch (useTimeType) {
                     case "1":
